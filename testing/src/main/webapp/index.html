@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Working W JSON</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">      
+</head>  
+<body>
+<header>
+</header>
+<section>
+</section>
+<script>
+
+  var header = document.querySelector('header');
+  var section = document.querySelector('section');           
+  var requestURL = 'D:\MyInterviewPractise\testing\src\test1.json';    
+  var request = new XMLHttpRequest();   
+  request.open('GET', requestURL);
+  request.responseType = 'json';   
+  request.send();    
+  request.onload = function() {
+      var cars = request.response;
+      populateHeader();  
+      displayBlue(cars);
+      displayLowestPrice(cars);
+      displayBestProfit(cars);
+      displayCarsCostTable(cars);
+      displayProfitTable(cars);           
+  };    
+    
+  function displayCarsCostTable(inArr) {
+    var outArr = [];    
+    inArr.forEach(function(x) {
+      discount = (x.perdayrent.Discount / 100) * x.perdayrent.Price;
+      pricePerDay = x.perdayrent.Price - discount;       
+      outArr.push({'Make' : x.make, 'Model' : x.model, 'perDayPRICE' : pricePerDay, 'Color' : x.metadata.Color })         
+    });
+    var myArticle = document.createElement('article');
+    var myH2 = document.createElement('h2');
+    var myList = document.createElement('ul');
+    for (var i = 0; i < outArr.length; i++) {       
+      var listItem = document.createElement('li');
+      listItem.textContent = outArr[i].Make + ' ' + outArr[i].Model + ': ' + outArr[i].Color + ': $' + outArr[i].perDayPRICE;
+      myList.appendChild(listItem);
+    }
+     myH2.textContent = 'Rental Price Per Day Table';    
+     myArticle.appendChild(myH2);   
+     myArticle.appendChild(myList);
+     section.appendChild(myArticle);  
+  }       
+  
+  function displayProfitTable(inArr) {
+    var outArr = [];         
+    inArr.forEach(function(x) {
+      ytdExpense = (x.metrics.yoymaintenancecost + x.metrics.depreciation);
+      discount = (x.perdayrent.Discount / 100) * x.perdayrent.Price;
+      pricePerDay = x.perdayrent.Price - discount;
+      ytdRev = (x.metrics.rentalcount.yeartodate * pricePerDay)
+      profit = ytdRev - ytdExpense.toFixed(2);
+      outArr.push({'Make' : x.make, 'Model' : x.model, 'ytdProfit' : profit});      
+    });        
+    var myArticle = document.createElement('article');
+    var myH2 = document.createElement('h2');
+    var myList = document.createElement('ul');
+    for (var i = 0; i < outArr.length; i++) {       
+      var listItem = document.createElement('li');
+      listItem.textContent = outArr[i].Make + ' ' + outArr[i].Model + ': $' + outArr[i].ytdProfit;
+      myList.appendChild(listItem);
+    }
+      myH2.textContent = 'Profit Table YTD';    
+      myArticle.appendChild(myH2);   
+      myArticle.appendChild(myList);
+      section.appendChild(myArticle);  
+  }
+
+  function displayBestProfit(inArr) {
+    var outArr = [];         
+    inArr.forEach(function(x) {
+      ytdExpense = (x.metrics.yoymaintenancecost + x.metrics.depreciation);
+      discount = (x.perdayrent.Discount / 100) * x.perdayrent.Price;
+      pricePerDay = x.perdayrent.Price - discount;
+      ytdRev = (x.metrics.rentalcount.yeartodate * pricePerDay)
+      profit = ytdRev - ytdExpense.toFixed(2);
+      outArr.push({'Make' : x.make, 'Model' : x.model, 'ytdProfit' : profit});      
+    });    
+    var bestProfit = outArr[0];    
+    outArr.forEach(function(x) {    
+      if (x.ytdProfit > bestProfit.ytdProfit) {         
+        bestProfit = x;    
+      }       
+    });   
+    var myArticle = document.createElement('article');
+    var myH2 = document.createElement('h2');   
+    var myList = document.createElement('ul');   
+    var listItem = document.createElement('li');
+    listItem.textContent = bestProfit.Make + ' ' + bestProfit.Model + ': $' + bestProfit.ytdProfit;
+    myList.appendChild(listItem);           
+    myH2.textContent = 'Best Profit YTD';    
+    myArticle.appendChild(myH2);   
+    myArticle.appendChild(myList);
+    section.appendChild(myArticle);     
+  };  
+
+  function displayLowestPrice(inArr) {
+    var outArr = [];        
+    inArr.forEach(function(x) {
+      discount = (x.perdayrent.Discount / 100) * x.perdayrent.Price;
+      pricePerDay = x.perdayrent.Price - discount;       
+      outArr.push({'Make' : x.make, 'Model' : x.model, 'perDayPRICE' : pricePerDay })         
+    });             
+    var lowPriceCar = outArr[0];    
+    outArr.forEach(function(x) {                 
+      if (x.perDayPRICE < lowPriceCar.perDayPRICE) {      
+        lowPriceCar = x;        
+      }
+    });
+    var myArticle = document.createElement('article');
+    var myH2 = document.createElement('h2');   
+    var myList = document.createElement('ul');   
+    var listItem = document.createElement('li');
+    listItem.textContent = lowPriceCar.Make + ' ' + lowPriceCar.Model + ': $' + lowPriceCar.perDayPRICE;
+    myList.appendChild(listItem);           
+    myH2.textContent = 'Least Expensive Rental';    
+    myArticle.appendChild(myH2);   
+    myArticle.appendChild(myList);
+    section.appendChild(myArticle);
+  };  
+
+  function displayBlue(inArr) {
+    var outArr = [];
+    inArr.forEach(function(x) {
+      if (x.metadata.Color === 'Blue' && x.make === 'Tesla') {
+        outArr.push({'Make':x.make, 'Model':x.model, 'Color': x.metadata.Color, 'Notes': x.metadata.Notes});        
+      }      
+    });
+    var myArticle = document.createElement('article');
+    var myH2 = document.createElement('h2');    
+    var myList = document.createElement('ul');
+    if (outArr.length === 0) {      
+      var listItem = document.createElement('li');        
+      listItem.textContent = "NONE"; 
+      myList.appendChild(listItem);
+    }
+    else {
+      for (var i = 0; i < outArr.length; i++) {      
+        var listItem = document.createElement('li');
+        listItem.textContent = outArr[i].Model + ': ' + outArr[i].Notes 
+        myList.appendChild(listItem);
+      }
+    }    
+    myH2.textContent = 'Blue Tesla\'s';    
+    myArticle.appendChild(myH2);    
+    myArticle.appendChild(myList);
+    section.appendChild(myArticle);
+  }
+    
+  function populateHeader() {
+    var myH1 = document.createElement('h2');
+    myH1.textContent = 'Working with a JSON response';
+    header.appendChild(myH1);      
+  }     
+    </script>
+  </body> 
+</html>

@@ -1,0 +1,170 @@
+[
+{
+    "make": "Chevy",
+    "model": "Corvette",
+    "vin": "23AGHY64352JITEG98K",
+    "metadata": {
+        "Color": "Blue",
+        "Notes": "After market Rear Tires"
+    },
+    "perdayrent": {
+        "Price": 210,
+        "Discount": 10
+    },
+    "metrics": {
+        "yoymaintenancecost": 3190.76,
+        "depreciation": 1256.43,
+        "rentalcount": {
+            "lastweek": 2,
+            "yeartodate": 121
+        }
+    }
+},
+{
+    "make": "Tesla",
+    "model": "Sedan Screamer",
+    "vin": "98AGHY64352JITEG98K",
+    "metadata": {
+        "Color": "Blue",
+        "Notes": "Electric and FAST"
+    },
+    "perdayrent": {
+        "Price": 300,
+        "Discount": 12
+    },
+    "metrics": {
+        "yoymaintenancecost": 190.76,
+        "depreciation": 940.43,
+        "rentalcount": {
+            "lastweek": 4,
+            "yeartodate": 421
+        }
+    }
+},
+{
+    "make": "Ford",
+    "model": "F250",
+    "vin": "68AGHY64352JITEG98K",
+    "metadata": {
+        "Color": "Silver",
+        "Notes": "Some off Roading Character marks"
+    },
+    "perdayrent": {
+        "Price": 290,
+        "Discount": 17
+    },
+    "metrics": {
+        "yoymaintenancecost": 2132.76,
+        "depreciation": 1556.43,
+        "rentalcount": {
+            "lastweek": 2,
+            "yeartodate": 92
+        }
+    }
+},
+ {
+  "make": "Audi",
+  "model": "A7",
+  "vin": "09AGHY64352JITEG98K",
+  "metadata": {
+      "Color": "Black",
+      "Notes": "Scratches on the front side of the car"
+   },
+  "perdayrent": {
+      "Price": 140,
+      "Discount": 15
+  },
+  "metrics": {
+      "yoymaintenancecost": 2190.76,
+      "depreciation": 2256.43,
+      "rentalcount": {
+          "lastweek": 4,
+          "yeartodate": 221
+      }
+  }
+},  
+{
+    "make": "Tesla",
+    "model": "Economy",
+    "vin": "98AGHY64352JITEG98K",
+    "metadata": {
+        "Color": "Brown",
+        "Notes": "Plain Version, hood scratch"
+    },
+    "perdayrent": {
+        "Price": 150,
+        "Discount": 15
+    },
+    "metrics": {
+        "yoymaintenancecost": 200.76,
+        "depreciation": 840.43,
+        "rentalcount": {
+            "lastweek": 4,
+            "yeartodate": 416
+        }
+    }
+},    
+{
+    "make": "Porsce",
+    "model": "911",
+    "vin": "37AGHY64352JITEG98K",
+    "metadata": {
+        "Color": "Red",
+        "Notes": "High Performance"
+    },
+    "perdayrent": {
+        "Price": 410,
+        "Discount": 10
+    },
+    "metrics": {
+        "yoymaintenancecost": 4190.76,
+        "depreciation": 1001.43,
+        "rentalcount": {
+            "lastweek": 2,
+            "yeartodate": 321
+        }
+    }
+},
+{
+    "make": "Bugati",
+    "model": "convertable",
+    "vin": "34rtHY64352JITEG98K",
+    "metadata": {
+        "Color": "Red",
+        "Notes": "High Performance"
+    },
+    "perdayrent": {
+        "Price": 460,
+        "Discount": 5
+    },
+    "metrics": {
+        "yoymaintenancecost": 4200.76,
+        "depreciation": 900.43,
+        "rentalcount": {
+            "lastweek": 1,
+            "yeartodate": 109
+        }
+    }
+},    
+{
+    "make": "Tesla",
+    "model": "SUV",
+    "vin": "27AGHr64352JITEG98K",
+    "metadata": {
+        "Color": "Blue",
+        "Notes": "Rear latch problems"
+    },
+    "perdayrent": {
+        "Price": 350,
+        "Discount": 14
+    },
+    "metrics": {
+        "yoymaintenancecost": 3410.76,
+        "depreciation": 1022.43,
+        "rentalcount": {
+            "lastweek": 4,
+            "yeartodate": 221
+        }
+    }
+} 
+]
