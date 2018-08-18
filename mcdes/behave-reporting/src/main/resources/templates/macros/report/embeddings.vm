@@ -1,0 +1,63 @@
+#macro(includeEmbeddings, $embeddings)
+
+#if (!$embeddings.isEmpty())
+  <div class="embeddings inner-level">
+  #foreach($embedding in $embeddings)
+    #if ($embedding.getMimeType() == "image/png")
+      #includeImageEmbedding($embedding, "png", $foreach.index)
+    #elseif ($embedding.getMimeType() == "image/bmp")
+      #includeImageEmbedding($embedding, "bmp", $foreach.index)
+    #elseif ($embedding.getMimeType() == "image/jpeg")
+      #includeImageEmbedding($embedding, "jpeg", $foreach.index)
+    #elseif ($embedding.getMimeType() == "text/plain")
+      #includeTextEmbedding($embedding, "Plain text", $foreach.index)
+    #elseif ($embedding.getMimeType() == "text/html")
+      #includeTextEmbedding($embedding, "HTML", $foreach.index)
+    #elseif ($embedding.getMimeType() == "application/json")
+      #includeTextEmbedding($embedding, "JSON", $foreach.index)
+    #elseif ($embedding.getMimeType() == "image/url")
+      #includeImageReferenceEmbedding($embedding, $foreach.index)
+    #else
+      #includeUnknownEmbedding($embedding, $foreach.index)
+    #end
+  #end
+  </div>
+#end
+
+#end
+
+
+
+#macro(includeImageEmbedding, $embedding, $image_type, $index)
+  #set($Quote = '"')
+  #includeExpandableEmbedding($embedding, $image_type, "<img src=${Quote}embeddings/$embedding.getFileName()${Quote}>", $index)
+#end
+
+#macro(includeImageReferenceEmbedding, $embedding, $index)
+  #set($Quote = '"')
+  #includeExpandableEmbedding($embedding, "Image", "<img src=${Quote}$embedding.getData()${Quote}>", $index)
+#end
+
+#macro(includeTextEmbedding, $embedding, $format, $index)
+  #includeExpandableEmbedding($embedding, $format, "<pre>$embedding.getDecodedData()</pre>", $index)
+#end
+
+
+#macro(includeUnknownEmbedding, $embedding, $index)
+  #set($Quote = '"')
+  #includeExpandableEmbedding($embedding, $embedding.getMimeType(), "File the <a href=${Quote}https://github.com/willowmck/behave-reporting/issues${Quote}>bug</a> so support for this mimetype can be added.", $index)
+#end
+
+
+#macro(includeExpandableEmbedding, $embedding, $type, $content, $index)
+  #set($index = $index + 1)
+  <div class="embedding indention">
+    <div data-toggle="collapse" data-target="#embedding_$embedding.getFileId()" class="collapsable-control">
+      <a>Attachment $index ($type)</a>
+      <a href="embeddings/$embedding.getFileName()" target="_blank"><span class="download-button glyphicon glyphicon-download-alt"></span></a>
+    </div>
+    <div id="embedding_$embedding.getFileId()" class="collapse collapsable-detail">
+      <span class="embedding-content">$content</span>
+    </div>
+  </div>
+#end

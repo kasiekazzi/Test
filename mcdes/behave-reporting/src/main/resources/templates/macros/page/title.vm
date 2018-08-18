@@ -1,0 +1,9 @@
+#macro(includeTitle, $reportName)
+
+#set($buildNo = "")
+#if($jenkins_source)
+  #set($buildNo = "(no $build_number)")
+#end
+<title>Behave Html Reports $buildNo - $reportName</title>
+
+#end

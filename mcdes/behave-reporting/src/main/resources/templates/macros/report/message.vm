@@ -1,0 +1,16 @@
+#macro(includeMessage, $messageName, $message)
+
+#if ($message)
+  <div class="inner-level">
+    <div class="message indention">
+      <div data-toggle="collapse" class="collapsable-control" data-target="#msg-$message.hashCode()">
+          <a>$messageName</a>
+      </div>
+      <div id="msg-$message.hashCode()" class="collapse collapsable-details">
+        <pre>$message</pre>
+      </div>
+    </div>
+  </div>
+#end
+
+#end
